@@ -8,10 +8,11 @@ $password = $_POST["password"]?? "";
 if (empty($email) || empty($password)){
         $error = "Please enter email and password.";
     } else {
-        $sql = "SELECT id, firstname, lastname, password FROM user WHERE email ='$email' AND password = '$password'";
+        $sql = "SELECT id, firstname, lastname, username, password FROM user WHERE email ='$email' AND password = '$password'";
         $result = $conn->query($sql);
 
         if($result && $result->num_rows > 0){
+                $user = $result->fetch_assoc();
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];

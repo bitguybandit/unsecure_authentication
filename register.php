@@ -40,7 +40,7 @@ if(isset($_POST["register"])){
     $stmt->bind_param('ssssssss',$firstname, $lastname, $age, $gender, $address, $email, $username, $password);
 
     if($stmt->execute()){
-        header("Location: landing.php");
+        header("Location: landing.html");
     }else{
         echo "Error". $stmt->error;
     }
