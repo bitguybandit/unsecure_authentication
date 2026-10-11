@@ -8,17 +8,15 @@ $password = $_POST["password"]?? "";
 if (empty($email) || empty($password)){
         $error = "Please enter email and password.";
     } else {
-        $sql = "SELECT id, username, password FROM user WHERE email = '$email' AND password = '$password'";
+        $sql = "SELECT id, firstname, lastname, password FROM user WHERE email ='$email' AND password = '$password'";
         $result = $conn->query($sql);
 
-        if ($result&& $result ->num_rows > 0) {
-            $user = $result->fetch_assoc();
-                
+        if($result && $result->num_rows > 0){
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                
-                header("Location: landing.php");
+                header("Location: landing.html");
                 exit();
             } else {
                 $error = "Invalid Username or Password.";
@@ -34,7 +32,7 @@ if (empty($email) || empty($password)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     

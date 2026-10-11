@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local XSS Training Lab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Local XSS Training Lab</h1>
+
+  <p class="warning">
+    For classroom use only. Run this page locally and never test it against systems you do not own.
+  </p>
+
+  <section class="card">
+    <h2>Exercise A: Reflected XSS</h2>
+
+    <form id="reflectedForm">
+      <label for="reflectedInput">Enter a greeting:</label>
+      <textarea id="reflectedInput" placeholder="Type a message"></textarea>
+      <button type="submit">Display Message</button>
+    </form>
+
+    <div id="reflectedOutput" class="output"></div>
+  </section>
+
+  <section class="card">
+    <h2>Exercise B: DOM XSS</h2>
+
+    <label for="domInput">Enter a message:</label>
+    <textarea id="domInput" placeholder="Type a message"></textarea>
+    <button id="domButton">Display Message</button>
+
+    <div id="domOutput" class="output"></div>
+  </section>
+
+  <section class="card">
+    <h2>Exercise C: Safe Output</h2>
+
+    <label for="safeInput">Enter a message:</label>
+    <textarea id="safeInput" placeholder="Type a message"></textarea>
+    <button id="safeButton">Display Safely</button>
+
+    <div id="safeOutput" class="output"></div>
+  </section>
+
+  <script>
+    const reflectedForm = document.getElementById("reflectedForm");
+    const reflectedInput = document.getElementById("reflectedInput");
+    const reflectedOutput = document.getElementById("reflectedOutput");
+
+    reflectedForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const message = reflectedInput.value;
+
+      reflectedOutput.innerHTML = "You entered: " + message;
+    });
+
+    const domInput = document.getElementById("domInput");
+    const domButton = document.getElementById("domButton");
+    const domOutput = document.getElementById("domOutput");
+
+    domButton.addEventListener("click", function () {
+      const message = domInput.value;
+
+      domOutput.innerHTML = message;
+    });
+
+    const safeInput = document.getElementById("safeInput");
+    const safeButton = document.getElementById("safeButton");
+    const safeOutput = document.getElementById("safeOutput");
+
+    safeButton.addEventListener("click", function () {
+      const message = safeInput.value;
+
+      safeOutput.textContent = message;
+    });
+  </script>
+</body>
+</html>
